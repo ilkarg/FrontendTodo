@@ -1,0 +1,95 @@
+body { background-color: #62838A; }
+
+#add-task-div
+{
+    background-color: #394C50;
+}
+
+#add-task-label
+{
+    font-weight: bold;
+    vertical-align: 5px;
+    margin: -10px 10px 0px 10px;
+    font-size: 20px;
+    color: white;
+}
+
+#add-task-input
+{
+    vertical-align: 10px;
+    width: 80%;
+    border-radius: 10px;
+    border-style: none;
+    vertical-align: 5px;
+
+}
+
+#add-task-button
+{
+    width: 27px;
+    height: 27px;
+    cursor: pointer;
+    margin-left: 10px;
+    vertical-align: -2px;
+}
+
+#home-button
+{
+    width: 27px;
+    height: 27px;
+    cursor: pointer;
+    margin-left: 10px;
+    vertical-align: -2px;
+}
+
+#todo-task
+{
+    margin: 15px 0px 0px 250px;
+    background: white;
+    width: 70%;
+    border-radius: 15px;
+    height: 40px;
+}
+
+#label-task
+{
+    display: inline-block;
+    margin: 10px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#label-task:hover
+{
+    cursor: pointer;
+}
+
+#button-task-remove
+{
+    float: right;
+    margin: 5px 5px 0px 0px;
+    height: 30px;
+    width: 30px;
+}
+
+#button-task-remove:hover
+{
+    cursor: pointer;
+}
+
+#button-task-edit
+{
+    float: right;
+    margin: 5px 10px 0px 0px;
+    height: 30px;
+    width: 30px;
+}
+
+#button-task-edit:hover
+{
+    cursor: pointer;
+}
