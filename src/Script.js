@@ -11,9 +11,9 @@ window.addEventListener("beforeunload", function(e)
     SaveTasks();
 }, false);
 
-export function ClickOnEnter(e)
+export function ClickOnEnter(event)
 {
-    if (e.keyCode === 13)
+    if (event.keyCode === 13)
     {
         CreateTaskButtonClick();
     }
@@ -88,6 +88,8 @@ export function CreateNewTask(text)
             let taskTextTag = document.createElement('p');
             let buttonTaskRemove = document.createElement('img');
             let buttonTaskEdit = document.createElement('img');
+            let buttonTaskToUp = document.createElement('img');
+            let buttonTaskToDown = document.createElement('img');
 
             buttonTaskEdit.setAttribute('id', 'button-task-edit');
             buttonTaskEdit.setAttribute('src', './edit.png');
@@ -96,6 +98,14 @@ export function CreateNewTask(text)
             buttonTaskRemove.setAttribute('id', 'button-task-remove');
             buttonTaskRemove.setAttribute('src', './remove.png');
             buttonTaskRemove.addEventListener('click', RemoveTaskButtonClick);
+
+            buttonTaskToDown.setAttribute('id', 'button-task-to-down');
+            buttonTaskToDown.setAttribute('src', './TaskToDown.png');
+            buttonTaskToDown.addEventListener('click', TaskToDownButtonClick);
+
+            buttonTaskToUp.setAttribute('id', 'button-task-to-up');
+            buttonTaskToUp.setAttribute('src', './TaskToUp.png');
+            buttonTaskToUp.addEventListener('click', TaskToUpButtonClick);
 
             taskTextTag.addEventListener('click', ChangeTaskStatus);
             taskTextTag.setAttribute('id', 'label-task');
@@ -106,6 +116,8 @@ export function CreateNewTask(text)
             taskDiv.appendChild(taskTextTag);
             taskDiv.appendChild(buttonTaskRemove);
             taskDiv.appendChild(buttonTaskEdit);
+            taskDiv.appendChild(buttonTaskToDown);
+            taskDiv.appendChild(buttonTaskToUp);
             document.getElementById('root').appendChild(taskDiv);
 
             taskList.push(text);
@@ -122,6 +134,8 @@ function CreateLoadedTask(text)
         {
             let taskDiv = document.createElement('div');
             let taskTextTag = document.createElement('p');
+            let buttonTaskToUp = document.createElement('img');
+            let buttonTaskToDown = document.createElement('img');
             let buttonTaskRemove = document.createElement('img');
             let buttonTaskEdit = document.createElement('img');
 
@@ -133,6 +147,14 @@ function CreateLoadedTask(text)
             buttonTaskRemove.setAttribute('src', './remove.png');
             buttonTaskRemove.addEventListener('click', RemoveTaskButtonClick);
 
+            buttonTaskToDown.setAttribute('id', 'button-task-to-down');
+            buttonTaskToDown.setAttribute('src', './TaskToDown.png');
+            buttonTaskToDown.addEventListener('click', TaskToDownButtonClick);
+
+            buttonTaskToUp.setAttribute('id', 'button-task-to-up');
+            buttonTaskToUp.setAttribute('src', './TaskToUp.png');
+            buttonTaskToUp.addEventListener('click', TaskToUpButtonClick);
+
             taskTextTag.addEventListener('click', ChangeTaskStatus);
             taskTextTag.setAttribute('id', 'label-task');
             taskTextTag.innerHTML = text;
@@ -142,6 +164,8 @@ function CreateLoadedTask(text)
             taskDiv.appendChild(taskTextTag);
             taskDiv.appendChild(buttonTaskRemove);
             taskDiv.appendChild(buttonTaskEdit);
+            taskDiv.appendChild(buttonTaskToDown);
+            taskDiv.appendChild(buttonTaskToUp);
             document.getElementById('root').appendChild(taskDiv);
         }
     }
@@ -181,17 +205,8 @@ function EditTaskButtonClick()
     {
         for (let i = 0; i < taskList.length; i++)
         {
-            //alert(this.parentElement.innerText);
             if (this.parentElement.querySelector('p').innerText == taskList[i])
             {
-                /*for (let j = 0; j < document.querySelectorAll('#todo-task p'); j++)
-                {
-                    if (taskList[i] == document.querySelectorAll('#todo-task p')[j])
-                    {
-                        document.querySelectorAll('#todo-task p')[j].innerText = text;
-                        alert(document.querySelectorAll('#todo-task p')[j].innerText);
-                    }
-                }*/
                 taskList[i] = text;
                 this.parentElement.querySelector('p').innerText = text;
             }
@@ -214,4 +229,65 @@ function RemoveTaskButtonClick()
         }
     }
     this.parentElement.remove();
+}
+
+function TaskToUpButtonClick()
+{
+    let parent = document.querySelectorAll('#todo-task')[0].parentNode;
+    let currentTask = this.parentElement;
+
+    for (let i = 0; i < document.querySelectorAll('#todo-task').length; i++)
+    {
+        if (document.querySelectorAll('#todo-task').length > 1)
+        {
+            if (currentTask.innerText == document.querySelectorAll('#todo-task p')[i].textContent)
+            {
+                if (i > 0)
+                {
+                    console.log(document.querySelectorAll('#todo-task')[i] + '\n' + document.querySelectorAll('#todo-task')[i - 1] + '\n' + taskList[i] + '\n' + taskList[i - 1]);
+                    parent.insertBefore(document.querySelectorAll('#todo-task')[i - 1], currentTask);
+
+                    console.log('\n' + document.querySelectorAll('#todo-task')[i] + '\n' + document.querySelectorAll('#todo-task')[i - 1] + '\n' + taskList[i] + '\n' + taskList[i - 1]);
+                    let currentTaskInList = taskList[i];
+                    let currentTaskStatusInList = taskListStatus[i];
+
+                    taskList[i] = taskList[i - 1];
+                    taskList[i - 1] = currentTaskInList;
+
+                    taskListStatus[i] = taskListStatus[i - 1];
+                    taskListStatus[i - 1] = currentTaskStatusInList;
+                    console.log('\n' + document.querySelectorAll('#todo-task')[i] + '\n' + document.querySelectorAll('#todo-task')[i - 1] + '\n' + taskList[i] + '\n' + taskList[i - 1]);
+                }
+            }
+        }
+    }
+}
+
+function TaskToDownButtonClick()
+{
+    let parent = document.querySelectorAll('#todo-task')[0].parentNode;
+    let currentTask = this.parentElement;
+
+    for (let i = 0; i < document.querySelectorAll('#todo-task').length; i++)
+    {
+        if (document.querySelectorAll('#todo-task').length > 1)
+        {
+            if (currentTask.innerText == document.querySelectorAll('#todo-task p')[i].textContent)
+            {
+                if (i < document.querySelectorAll('#todo-task').length - 1)
+                {
+                    parent.insertBefore(document.querySelectorAll('#todo-task')[i + 1], currentTask);
+
+                    let currentTaskInList = taskList[i];
+                    let currentTaskStatusInList = taskListStatus[i];
+
+                    taskList[i] = taskList[i + 1];
+                    taskList[i + 1] = currentTaskInList;
+
+                    taskListStatus[i] = taskListStatus[i + 1];
+                    taskListStatus[i + 1] = currentTaskStatusInList;
+                }
+            }
+        }
+    }
 }

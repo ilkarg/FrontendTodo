@@ -93,3 +93,29 @@ body { background-color: #62838A; }
 {
     cursor: pointer;
 }
+
+#button-task-to-up
+{
+    float: right;
+    margin: 0px 10px 0px 0px;
+    height: 40px;
+    width: 40px;
+}
+
+#button-task-to-up:hover
+{
+    cursor: pointer;
+}
+
+#button-task-to-down
+{
+    float: right;
+    margin: 0px 10px 0px 0px;
+    height: 40px;
+    width: 40px;
+}
+
+#button-task-to-down:hover
+{
+    cursor: pointer;
+}
