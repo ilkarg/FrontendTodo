@@ -244,10 +244,8 @@ function TaskToUpButtonClick()
             {
                 if (i > 0)
                 {
-                    console.log(document.querySelectorAll('#todo-task')[i] + '\n' + document.querySelectorAll('#todo-task')[i - 1] + '\n' + taskList[i] + '\n' + taskList[i - 1]);
                     parent.insertBefore(document.querySelectorAll('#todo-task')[i - 1], currentTask);
 
-                    console.log('\n' + document.querySelectorAll('#todo-task')[i] + '\n' + document.querySelectorAll('#todo-task')[i - 1] + '\n' + taskList[i] + '\n' + taskList[i - 1]);
                     let currentTaskInList = taskList[i];
                     let currentTaskStatusInList = taskListStatus[i];
 
@@ -256,7 +254,6 @@ function TaskToUpButtonClick()
 
                     taskListStatus[i] = taskListStatus[i - 1];
                     taskListStatus[i - 1] = currentTaskStatusInList;
-                    console.log('\n' + document.querySelectorAll('#todo-task')[i] + '\n' + document.querySelectorAll('#todo-task')[i - 1] + '\n' + taskList[i] + '\n' + taskList[i - 1]);
                 }
             }
         }
