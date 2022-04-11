@@ -244,7 +244,7 @@ function TaskToUpButtonClick()
             {
                 if (i > 0)
                 {
-                    parent.insertBefore(document.querySelectorAll('#todo-task')[i - 1], currentTask);
+                    parent.insertBefore(currentTask, document.querySelectorAll('#todo-task')[i - 1]);
 
                     let currentTaskInList = taskList[i];
                     let currentTaskStatusInList = taskListStatus[i];
